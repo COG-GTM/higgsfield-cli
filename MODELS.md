@@ -334,7 +334,7 @@ Constraints:
 | `--aspect_ratio` | false | `1:1` | `1:1`, `4:3`, `3:4`, `16:9`, `9:16` |
 | `--prompt` | true | — | string |
 
-## Video (22)
+## Video (25)
 
 ### brain_activity — Virality Predictor
 
@@ -464,6 +464,101 @@ Example:
 
 ```bash
 higgsfield generate create gemini_omni --prompt "cinematic product reveal with smooth camera motion" --image ./product.png --duration 8 --resolution 720p --wait
+```
+
+### genjutsu_motion_transfer — Genjutsu Motion Transfer
+
+Applies the motion of a source video to the character(s) in your reference images. Source video must be at least 4 seconds; longer clips are trimmed to their first 30 seconds.
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--image-references` (or `--image`) (1..8) | true | — | UUID or path |
+| `--prompt` | false | — | string |
+| `--resolution` | false | `720p` | `480p`, `720p`, `1080p` |
+| `--video-references` (or `--video`) (single) | true | — | UUID or path |
+
+Constraints:
+
+- Exactly one video is required in video_references.
+- Between 1 and 8 image_references are required.
+
+Example:
+
+```bash
+higgsfield generate create genjutsu_motion_transfer --video ./dance.mp4 --image ./character.png --prompt "keep the character's outfit consistent" --wait
+```
+
+### genjutsu_object_swap — Genjutsu Object Swap
+
+Swaps an object or character in a source video for the one shown in your reference images. Source video must be at least 4 seconds and at least 409,600 pixels per frame; longer clips are trimmed to their first 30 seconds.
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--image-references` (or `--image`) (1..8) | true | — | UUID or path |
+| `--prompt` | false | — | string |
+| `--resolution` | false | `720p` | `480p`, `720p`, `1080p` |
+| `--video-references` (or `--video`) (single) | true | — | UUID or path |
+
+Constraints:
+
+- Exactly one video is required in video_references.
+- Between 1 and 8 image_references are required.
+- Source video frames must be at least 409,600 pixels (width × height).
+
+Example:
+
+```bash
+higgsfield generate create genjutsu_object_swap --video ./street.mp4 --image ./sneaker.png --prompt "replace the shoes with the referenced sneaker" --wait
+```
+
+### genjutsu_restyle — Genjutsu Restyle
+
+Changes the visual style of a source video while keeping its motion, shot composition, and source audio. Source video must be 4–30 seconds and at most 200 MiB; longer clips are trimmed to their first 30 seconds.
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--image-references` (or `--image`) (0..5) | false | — | UUID or path |
+| `--preset_id` | true | — | preset UUID (see below) |
+| `--prompt` | false | — | string |
+| `--resolution` | false | `720p` | `480p`, `720p`, `1080p` |
+| `--video-references` (or `--video`) (single) | true | — | UUID or path |
+
+Constraints:
+
+- Exactly one video is required in video_references.
+- At most 5 image_references (character references) are allowed.
+
+Presets (`--preset_id`):
+
+| preset | preset_id |
+|---|---|
+| Cel-Shaded CG Anime | `c2143317-f28d-4c3c-a0b8-39bd547e08a7` |
+| Chunky Textured Low-Poly | `f1d0c30d-a2ec-4c33-a892-d8d158e2d093` |
+| Comic 3D | `3dc6d454-808d-4e27-8a4e-4751da818324` |
+| Expressive 2D Animation | `368c6a65-4a48-4e3a-80c7-c460455b5e17` |
+| Expressive Gouache Fashion | `89484749-e1b9-40c9-979e-fc578c3aad6d` |
+| Felt Puppet Stop Motion | `bf6aee41-83a8-433c-b5a5-2309c7bd5b26` |
+| Graphic Cel | `523cf5be-67fc-46d6-bfdb-56ccc3e2a8f6` |
+| Grotesque Street CGI | `c3268f8d-4cc0-423c-975d-ca1bf7df385a` |
+| Hand-Painted Cel Animation | `067b27d4-8d8f-44d1-a24b-0f4c28012e4b` |
+| Knitted Yarn World | `2b5b68c4-9253-4d79-9d05-81e7718d8d7a` |
+| Neon Graphic Cinematic 3D | `41d02f6d-1d5d-4efa-9942-9fe71de9429b` |
+| Nighttime Anime Pixel Art | `e54beac7-ca48-4034-856b-0a6f2b05081a` |
+| Outline-free Cel | `55aee79b-bb36-40e3-b957-205e6867a3d9` |
+| Painterly Cinematic 3D | `85bc9e2c-f896-41d7-b280-53f2f5e321ac` |
+| Painterly Sculpted Animation | `083abd05-afbd-4cda-857f-7f2d2082e9b2` |
+| Retro Game 3D | `255f5244-b43d-43fc-9c28-7138f8c12984` |
+| Rounded Toy CGI | `6bce8e75-df92-487f-a4f0-a324a6a297f3` |
+| Sculptural 3D Fashion | `f7786536-123b-47b8-ab65-ee0647df1509` |
+| Textured Gouache Character Illustration | `f2b4e920-3b1e-4931-8a86-b06566005145` |
+| Warm Painterly 3D Animation | `e82b7bbb-c8bf-4d70-a866-e7b15e744a2b` |
+
+The preset catalog can change; fetch the live list with `GET https://api.higgsfield.ai/models/higgsfield/genjutsu/restyle/v1.0/presets`.
+
+Example:
+
+```bash
+higgsfield generate create genjutsu_restyle --video ./clip.mp4 --preset_id c2143317-f28d-4c3c-a0b8-39bd547e08a7 --prompt "preserve the original movement and camera composition" --resolution 720p --wait
 ```
 
 ### grok_video — Grok Video

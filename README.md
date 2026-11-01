@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@higgsfield/cli?style=flat-square)](https://www.npmjs.com/package/@higgsfield/cli)
 [![license](https://img.shields.io/github/license/higgsfield-ai/cli?style=flat-square)](./LICENSE)
 
-Generate images, videos, 3D assets, audio, and finished-video analysis from the terminal using 40+ [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, Nano Banana 2 Lite, Gemini Omni Flash, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.5, Marketing Studio, Virality Predictor, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
+Generate images, videos, 3D assets, audio, and finished-video analysis from the terminal using 40+ [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, Nano Banana 2 Lite, Gemini Omni Flash, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.5, Genjutsu, Marketing Studio, Virality Predictor, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
 
 ![Higgsfield CLI demo](./demo.png)
 
@@ -107,6 +107,21 @@ higgsfield generate create seedance_2_5 \
   --prompt "drone shot over a mountain valley at sunrise" \
   --aspect_ratio 16:9 --duration 5 \
   --resolution 1080p --mode t2v --bitrate_mode high \
+  --wait
+```
+
+### Genjutsu Restyle
+
+Video-to-video: restyle a source clip (4–30 s) with a style preset while keeping
+its motion, composition, and audio. Preset IDs are listed in
+[MODELS.md](./MODELS.md#genjutsu_restyle--genjutsu-restyle). Genjutsu also
+offers `genjutsu_motion_transfer` and `genjutsu_object_swap`.
+
+```bash
+higgsfield generate create genjutsu_restyle \
+  --video ./clip.mp4 \
+  --preset_id c2143317-f28d-4c3c-a0b8-39bd547e08a7 \
+  --resolution 720p \
   --wait
 ```
 
@@ -292,7 +307,7 @@ higgsfield generate create text2image_soul_v2 \
 | `soul_cast` | Soul Cast |
 | `marketing_studio_image` | Marketing Studio Image |
 
-### Video (22)
+### Video (25)
 
 | job_set_type | name |
 |---|---|
@@ -319,6 +334,9 @@ higgsfield generate create text2image_soul_v2 \
 | `cinematic_studio_video_v2` | Cinematic Studio Video V2 |
 | `marketing_studio_video` | Marketing Studio Video |
 | `video_background_remover` | Video Background Remover |
+| `genjutsu_restyle` | Genjutsu Restyle |
+| `genjutsu_motion_transfer` | Genjutsu Motion Transfer |
+| `genjutsu_object_swap` | Genjutsu Object Swap |
 
 ### 3D (5)
 
