@@ -292,12 +292,15 @@ higgsfield generate create text2image_soul_v2 \
 | `soul_cast` | Soul Cast |
 | `marketing_studio_image` | Marketing Studio Image |
 
-### Video (22)
+### Video (25)
 
 | job_set_type | name |
 |---|---|
 | `brain_activity` | Virality Predictor |
 | `gemini_omni` | Gemini Omni Flash |
+| `genjutsu_restyle` | Genjutsu Restyle |
+| `genjutsu_motion_transfer` | Genjutsu Motion Transfer |
+| `genjutsu_object_swap` | Genjutsu Object Swap |
 | `veo3_1` | Google Veo 3.1 |
 | `veo3_1_lite` | Google Veo 3.1 Lite |
 | `veo3` | Google Veo 3 |
