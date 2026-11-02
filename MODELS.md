@@ -334,7 +334,7 @@ Constraints:
 | `--aspect_ratio` | false | `1:1` | `1:1`, `4:3`, `3:4`, `16:9`, `9:16` |
 | `--prompt` | true | — | string |
 
-## Video (22)
+## Video (25)
 
 ### brain_activity — Virality Predictor
 
@@ -464,6 +464,73 @@ Example:
 
 ```bash
 higgsfield generate create gemini_omni --prompt "cinematic product reveal with smooth camera motion" --image ./product.png --duration 8 --resolution 720p --wait
+```
+
+### genjutsu_motion_transfer — Genjutsu Motion Transfer
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--image-references` (or `--image`) (1..8) | true | — | UUID or path |
+| `--prompt` | false | — | string |
+| `--resolution` | false | `720p` | `480p`, `720p`, `1080p` |
+| `--video-references` (or `--video`) (single) | true | — | UUID or path |
+
+Constraints:
+
+- Exactly one source video is required; it must be at least 4 s long, and videos longer than 30 s are trimmed to the first 30 s.
+- Between 1 and 8 image_references are required (ordered references for the subject that receives the motion).
+- Output duration follows the source video.
+- `--prompt` is optional guidance of at most 10,000 characters.
+
+Example:
+
+```bash
+higgsfield generate create genjutsu_motion_transfer --video ./dance.mp4 --image ./character.png --prompt "Keep the camera framing of the source." --resolution 720p --wait
+```
+
+### genjutsu_object_swap — Genjutsu Object Swap
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--image-references` (or `--image`) (1..8) | true | — | UUID or path |
+| `--prompt` | false | — | string |
+| `--resolution` | false | `720p` | `480p`, `720p`, `1080p` |
+| `--video-references` (or `--video`) (single) | true | — | UUID or path |
+
+Constraints:
+
+- Exactly one source video is required; it must be at least 4 s long, and videos longer than 30 s are trimmed to the first 30 s.
+- The source video must have at least 409,600 pixels per frame (width × height): 1280×720 is accepted, 854×480 is not.
+- Between 1 and 8 image_references are required (the replacement object).
+- `--prompt` is optional guidance of at most 10,000 characters.
+
+Example:
+
+```bash
+higgsfield generate create genjutsu_object_swap --video ./product-demo.mp4 --image ./new-bottle.png --prompt "Replace the bottle on the table with the referenced bottle." --resolution 720p --wait
+```
+
+### genjutsu_restyle — Genjutsu Restyle
+
+| flag | required | default | values |
+|---|---|---|---|
+| `--image-references` (or `--image`) (0..5) | false | — | UUID or path |
+| `--preset_id` | true | — | string (UUID) |
+| `--prompt` | false | — | string |
+| `--resolution` | false | `720p` | `480p`, `720p`, `1080p` |
+| `--video-references` (or `--video`) (single) | true | — | UUID or path |
+
+Constraints:
+
+- Exactly one source video is required; it must be at least 4 s long and at most 200 MiB, and videos longer than 30 s are trimmed to the first 30 s.
+- Keeps the source motion, composition and audio; only the visual style changes.
+- `--preset_id` takes a style preset id, not its name. List presets with `GET https://api.higgsfield.ai/models/higgsfield/genjutsu/restyle/v1.0/presets` (for example `c2143317-f28d-4c3c-a0b8-39bd547e08a7` = Cel-Shaded CG Anime).
+- At most 5 image_references are allowed (character appearance references); `--prompt` (at most 10,000 characters) adds guidance on top of the preset.
+
+Example:
+
+```bash
+higgsfield generate create genjutsu_restyle --video ./clip.mp4 --preset_id c2143317-f28d-4c3c-a0b8-39bd547e08a7 --prompt "Preserve the original movement and camera composition." --resolution 480p --wait
 ```
 
 ### grok_video — Grok Video
