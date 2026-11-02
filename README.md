@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@higgsfield/cli?style=flat-square)](https://www.npmjs.com/package/@higgsfield/cli)
 [![license](https://img.shields.io/github/license/higgsfield-ai/cli?style=flat-square)](./LICENSE)
 
-Generate images, videos, 3D assets, audio, and finished-video analysis from the terminal using 40+ [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, Nano Banana 2 Lite, Gemini Omni Flash, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.5, Marketing Studio, Virality Predictor, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
+Generate images, videos, 3D assets, audio, and finished-video analysis from the terminal using 40+ [Higgsfield AI](https://higgsfield.ai) models — Nano Banana Pro, Nano Banana 2 Lite, Gemini Omni Flash, Genjutsu, FLUX.2, Soul V2, Veo 3.1, Kling v3.0, Seedance 2.5, Marketing Studio, Virality Predictor, and more. Train face-faithful Soul characters and produce branded marketing assets without leaving your shell.
 
 ![Higgsfield CLI demo](./demo.png)
 
@@ -292,12 +292,15 @@ higgsfield generate create text2image_soul_v2 \
 | `soul_cast` | Soul Cast |
 | `marketing_studio_image` | Marketing Studio Image |
 
-### Video (22)
+### Video (25)
 
 | job_set_type | name |
 |---|---|
 | `brain_activity` | Virality Predictor |
 | `gemini_omni` | Gemini Omni Flash |
+| `genjutsu_motion_transfer` | Genjutsu Motion Transfer |
+| `genjutsu_object_swap` | Genjutsu Object Swap |
+| `genjutsu_restyle` | Genjutsu Restyle |
 | `veo3_1` | Google Veo 3.1 |
 | `veo3_1_lite` | Google Veo 3.1 Lite |
 | `veo3` | Google Veo 3 |
